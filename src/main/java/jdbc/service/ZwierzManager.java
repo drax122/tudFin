@@ -16,11 +16,11 @@ public class ZwierzManager {
     static Connection polaczenie;
     static Statement statement;
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://drax1224.unixstorm.org/drax1224_base?connectTimeout=600000";
+    static final String DB_URL = "jdbc:mysql://drax1224.unixstorm.org/drax1224_base";
     static final String USER = "drax1224_base";
     static final String PASS = "drax122";
 
-    public static void poloczenie(){
+    public static void polaczenie(){
         try{
             polaczenie = DriverManager.getConnection(DB_URL, USER, PASS);
         }catch(SQLException e){
@@ -153,7 +153,5 @@ public class ZwierzManager {
             e.printStackTrace();
         }
     }
-
-
 
 }

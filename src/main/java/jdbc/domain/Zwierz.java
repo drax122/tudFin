@@ -5,7 +5,7 @@ package jdbc.domain;
  */
 public class Zwierz {
 
-    private String Zwierz_ID;
+    private String zwierz_ID;
     private String wybieg_ID;
     private String rasa;
     private String gatunek;
@@ -22,11 +22,11 @@ public class Zwierz {
     }
 
     public String getZwierz_ID() {
-        return Zwierz_ID;
+        return zwierz_ID;
     }
 
     public void setZwierz_ID(String zwierz_ID) {
-        Zwierz_ID = zwierz_ID;
+        zwierz_ID = zwierz_ID;
     }
 
     public String getWybieg_ID() {
