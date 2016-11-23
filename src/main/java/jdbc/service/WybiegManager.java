@@ -100,7 +100,7 @@ public class WybiegManager {
         return count;
     }
 
-    public static void WykasujTabeleWybieg() {
+    public static void delTableWybieg() {
         try {
             PreparedStatement delTable = polaczenie.prepareStatement("DELETE FROM Wybieg");
             delTable.executeUpdate();

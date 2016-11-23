@@ -103,9 +103,56 @@ public class ZwierzManager {
         return count;
     }
 
+    public static ArrayList<Zwierz> WyswietlZwierzeZWybiegu(Zwierz zwierz){
+        ArrayList<Zwierz> Zwierze = new ArrayList<Zwierz>();
+        Zwierz z = new Zwierz();
+        try {
 
+            PreparedStatement Statement = polaczenie.prepareStatement("SET FOREIGN_KEY_CHECKS=0;");
+            Statement.executeUpdate();
+            String query = "SELECT * FROM Zwierz WHERE wybieg_ID=?;";
+            PreparedStatement Ssij = polaczenie.prepareStatement(query);
+            Ssij.setString(1, zwierz.getWybieg_ID());
 
+            ResultSet rs = Ssij.executeQuery();
 
+            while(rs.next()){
+                z.setZwierz_ID(rs.getString("zwierz_ID"));
+                z.setWybieg_ID(rs.getString("wybieg_ID"));
+                z.setRasa(rs.getString("rasa"));
+                z.setGatunek(rs.getString("gatunek"));
+                z.setCo_szama(rs.getString("co_szama"));
+                Zwierze.add(z);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Zwierze;
+    }
+
+    public static int ZmianaWybieguDlaZwierza(Zwierz zwierz){
+        int count = 0;
+        try {
+            PreparedStatement Statement = polaczenie.prepareStatement("SET FOREIGN_KEY_CHECKS=0;");
+            PreparedStatement Stmt = polaczenie.prepareStatement("UPDATE Zwierz SET wybieg_ID=? WHERE zwierz_ID=?;");
+            Stmt.setString(1, zwierz.getWybieg_ID());
+            Stmt.setString(2, zwierz.getZwierz_ID());
+            Statement.executeUpdate();
+            count = Stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public static void delTableZwierz() {
+        try {
+            PreparedStatement WykasujTabelePracownik = polaczenie.prepareStatement("DELETE FROM Pracownik");
+            WykasujTabelePracownik.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
