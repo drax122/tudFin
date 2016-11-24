@@ -26,7 +26,7 @@ public class Zwierz {
     }
 
     public void setZwierz_ID(String zwierz_ID) {
-        zwierz_ID = zwierz_ID;
+        this.zwierz_ID = zwierz_ID;
     }
 
     public String getWybieg_ID() {

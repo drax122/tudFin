@@ -23,6 +23,7 @@ public class ZwierzManager {
     public static void polaczenie(){
         try{
             polaczenie = DriverManager.getConnection(DB_URL, USER, PASS);
+            statement = polaczenie.createStatement();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -42,12 +43,12 @@ public class ZwierzManager {
         int count = 0;
         try {
             PreparedStatement DodajZwierza = polaczenie.prepareStatement("SET FOREIGN_KEY_CHECKS=0;");
-            PreparedStatement DodajZwierzaStmt = polaczenie.prepareStatement("INSERT INTO Pracownik (zwierz_ID, wybieg_ID, gatunek, rasa, co_szama) VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement DodajZwierzaStmt = polaczenie.prepareStatement("INSERT INTO Zwierz (zwierz_ID, rasa, gatunek, co_szama, wybieg_ID) VALUES (?, ?, ?, ?, ?)");
             DodajZwierzaStmt.setString(1, zwierz.getZwierz_ID());
-            DodajZwierzaStmt.setString(2, zwierz.getWybieg_ID());
+            DodajZwierzaStmt.setString(5, zwierz.getWybieg_ID());
             DodajZwierzaStmt.setString(3, zwierz.getGatunek());
-            DodajZwierzaStmt.setString(4, zwierz.getRasa());
-            DodajZwierzaStmt.setString(5, zwierz.getCo_szama());
+            DodajZwierzaStmt.setString(2, zwierz.getRasa());
+            DodajZwierzaStmt.setString(4, zwierz.getCo_szama());
             DodajZwierza.executeUpdate();
             count = DodajZwierzaStmt.executeUpdate();
         } catch (SQLException e) {
@@ -147,8 +148,8 @@ public class ZwierzManager {
 
     public static void delTableZwierz() {
         try {
-            PreparedStatement WykasujTabelePracownik = polaczenie.prepareStatement("DELETE FROM Pracownik");
-            WykasujTabelePracownik.executeUpdate();
+            PreparedStatement delTable = polaczenie.prepareStatement("DELETE FROM Zwierz");
+            delTable.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
